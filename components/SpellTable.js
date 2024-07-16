@@ -29,3 +29,7 @@ const SpellTable = () => {
         setLoading(false);
       });
   }, []);
+
+  const toggleExpand = (index) => {
+    setExpandedSpell(expandedSpell === index ? null : index);
+  };
