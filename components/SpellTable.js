@@ -7,6 +7,7 @@ const SpellTable = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedSpell, setExpandedSpell] = useState(null);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     axios.get('https://www.dnd5eapi.co/api/spells')
       .then(response => {
@@ -29,13 +30,16 @@ const SpellTable = () => {
         setLoading(false);
       });
   }, []);
-
+// used to manage the spell expansion state
+//     will be used to show the spell description
   const toggleExpand = (index) => {
     setExpandedSpell(expandedSpell === index ? null : index);
   };
+
   const renderSpell = ({ item, index }) => (
     <View>
       <TouchableOpacity onPress={() => toggleExpand(index)}>
+        {/* row headers */}
         <View style={styles.row}>
           <Text style={styles.cell}>{item.name}</Text>
           <Text style={styles.cell}>{item.level}</Text>
@@ -44,6 +48,7 @@ const SpellTable = () => {
           <Text style={styles.cell}>{item.range}</Text>
         </View>
       </TouchableOpacity>
+      {/* ensures that spell descriptions are displayed only when their corresponding spell row is expanded */}
       {expandedSpell === index && (
         <View style={styles.descriptionContainer}>
           <Text style={styles.description}>{item.desc.join(' ')}</Text>
@@ -52,6 +57,7 @@ const SpellTable = () => {
     </View>
   );
 
+// filter the spells based on user input
   const filteredSpells = spells.filter(spell => 
     spell.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -76,6 +82,7 @@ const SpellTable = () => {
             <Text style={styles.headerCell}>School</Text>
             <Text style={styles.headerCell}>Range</Text>
           </View>
+          {/* create FlatList for rendering filtered spells */}
           <FlatList
             data={filteredSpells}
             renderItem={renderSpell}
