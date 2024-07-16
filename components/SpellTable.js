@@ -52,3 +52,7 @@ const SpellTable = () => {
     </View>
   );
 
+  const filteredSpells = spells.filter(spell => 
+    spell.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
