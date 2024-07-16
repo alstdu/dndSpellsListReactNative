@@ -33,3 +33,22 @@ const SpellTable = () => {
   const toggleExpand = (index) => {
     setExpandedSpell(expandedSpell === index ? null : index);
   };
+  const renderSpell = ({ item, index }) => (
+    <View>
+      <TouchableOpacity onPress={() => toggleExpand(index)}>
+        <View style={styles.row}>
+          <Text style={styles.cell}>{item.name}</Text>
+          <Text style={styles.cell}>{item.level}</Text>
+          <Text style={styles.cell}>{item.casting_time}</Text>
+          <Text style={styles.cell}>{item.school.name}</Text>
+          <Text style={styles.cell}>{item.range}</Text>
+        </View>
+      </TouchableOpacity>
+      {expandedSpell === index && (
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.description}>{item.desc.join(' ')}</Text>
+        </View>
+      )}
+    </View>
+  );
+
