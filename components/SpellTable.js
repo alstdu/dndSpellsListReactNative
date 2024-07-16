@@ -65,3 +65,24 @@ const SpellTable = () => {
         value={searchQuery}
         onChangeText={text => setSearchQuery(text)}
       />
+      {loading ? (
+        <ActivityIndicator size="large" color="#c78c6e" />
+      ) : (
+        <View style={styles.table}>
+          <View style={styles.headerRow}>
+            <Text style={styles.headerCell}>Name</Text>
+            <Text style={styles.headerCell}>Level</Text>
+            <Text style={styles.headerCell}>Time</Text>
+            <Text style={styles.headerCell}>School</Text>
+            <Text style={styles.headerCell}>Range</Text>
+          </View>
+          <FlatList
+            data={filteredSpells}
+            renderItem={renderSpell}
+            keyExtractor={item => item.index}
+          />
+        </View>
+      )}
+    </View>
+  );
+};
