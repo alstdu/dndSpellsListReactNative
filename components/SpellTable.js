@@ -11,6 +11,7 @@ const SpellTable = () => {
   useEffect(() => {
     axios.get('https://www.dnd5eapi.co/api/spells')
       .then(response => {
+        // fetch details for each spell using the URL
         const spellPromises = response.data.results.map(spell => 
           axios.get(`https://www.dnd5eapi.co${spell.url}`)
             .then(spellDetails => spellDetails.data)
@@ -18,7 +19,7 @@ const SpellTable = () => {
         Promise.all(spellPromises)
           .then(fullSpells => {
             setSpells(fullSpells);
-            setLoading(false);
+            setLoading(false); // turn off loading indicator after loading complete
           })
           .catch(error => {
             console.error('Error fetching spell details:', error);
@@ -38,8 +39,9 @@ const SpellTable = () => {
 
   const renderSpell = ({ item, index }) => (
     <View>
+      {/* allows each row to be pressable */}
       <TouchableOpacity onPress={() => toggleExpand(index)}>
-        {/* row headers */}
+        {/* insert information from api */}
         <View style={styles.row}>
           <Text style={styles.cell}>{item.name}</Text>
           <Text style={styles.cell}>{item.level}</Text>
@@ -71,10 +73,12 @@ const SpellTable = () => {
         value={searchQuery}
         onChangeText={text => setSearchQuery(text)}
       />
+      {/* loading indicator when loading spells */}
       {loading ? (
         <ActivityIndicator size="large" color="#c78c6e" />
       ) : (
         <View style={styles.table}>
+          {/* row headers */}
           <View style={styles.headerRow}>
             <Text style={styles.headerCell}>Name</Text>
             <Text style={styles.headerCell}>Level</Text>
