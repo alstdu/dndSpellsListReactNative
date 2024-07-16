@@ -86,3 +86,61 @@ const SpellTable = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: '#f5e0d3',
+  },
+  searchInput: {
+    height: 40,
+    borderColor: '#ddd',
+    borderWidth: 1,
+    marginBottom: 10,
+    marginTop: 40,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    backgroundColor: '#fff',
+  },
+  table: {
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    overflow: 'hidden',
+  },
+  headerRow: {
+    flexDirection: 'row',
+    backgroundColor: '#c78c6e',
+  },
+  headerCell: {
+    flex: 1,
+    padding: 10,
+    fontWeight: 'bold',
+    color: '#fff',
+    textAlign: 'center',
+  },
+  row: {
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+    backgroundColor: '#fff',
+  },
+  cell: {
+    flex: 1,
+    padding: 10,
+    textAlign: 'center',
+    color: '#333',
+  },
+  descriptionContainer: {
+    padding: 10,
+    backgroundColor: '#f9f9f9',
+    borderTopWidth: 1,
+    borderTopColor: '#ddd',
+  },
+  description: {
+    color: '#333',
+  },
+});
+
+export default SpellTable;
