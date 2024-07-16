@@ -56,3 +56,12 @@ const SpellTable = () => {
     spell.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  return (
+    <View style={styles.container}>
+      {/* TextInput for spell name search */}
+      <TextInput
+        style={styles.searchInput}
+        placeholder="Enter a Spell Name"
+        value={searchQuery}
+        onChangeText={text => setSearchQuery(text)}
+      />
