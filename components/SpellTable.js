@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import axios from 'axios';
+import { useMemo } from 'react';
 
 const SpellTable = () => {
   const [spells, setSpells] = useState([]);
@@ -37,7 +38,7 @@ const SpellTable = () => {
     setExpandedSpell(expandedSpell === index ? null : index);
   };
 
-  const renderSpell = ({ item, index }) => (
+  const renderSpell = useMemo(() => ({ item, index }) => (
     <View>
       {/* allows each row to be pressable */}
       <TouchableOpacity onPress={() => toggleExpand(index)}>
@@ -53,11 +54,11 @@ const SpellTable = () => {
       {/* ensures that spell descriptions are displayed only when their corresponding spell row is expanded */}
       {expandedSpell === index && (
         <View style={styles.descriptionContainer}>
-          <Text style={styles.description}>{item.desc.join(' ')}</Text>
+          <Text style={styles.description}>{item.desc.join('\n\n')}</Text>
         </View>
       )}
     </View>
-  );
+  ), [expandedSpell, toggleExpand]);
 
 // filter the spells based on user input
   const filteredSpells = spells.filter(spell => 
